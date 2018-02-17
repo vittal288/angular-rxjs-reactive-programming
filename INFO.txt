@@ -1,0 +1,8 @@
+PATTERNS are the recepies to build the softwares ....
+
+GITHUB Material:
+https://github.com/angular-university
+
+For Which problems, RXJS is giving solutions
+--> Through Event Bus pattern, we could not able to bind the data in ngOninit Method due to timing issue, so we have to capture in constructor() Method
+-->
