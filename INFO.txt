@@ -1,0 +1,10 @@
+The Custom Event emitter does not scale in complexity for following reason 
+1. There is no proper owner for testLesson data on the application and it is mutable between the components 
+2. and Time conttraint, to subscribe we have to capture in the constructor 
+3. Modifying the same data and yeilding un expected errors 
+
+To solve above problems, will use following design patterns 
+
+PATTERNS 
+1. Observable pattern 
+2. Store Pattern 

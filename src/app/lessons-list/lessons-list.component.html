@@ -1,6 +1,6 @@
 <table class="table lessons-list card card-strong">
     <tbody>
-    <tr *ngFor="let lesson of lessons">
+    <tr *ngFor="let lesson of lessons;let i=index">
         <td class="viewed">
             <input type="checkbox" (click)="toggleLessonViewed(lesson)">
         </td>
@@ -8,8 +8,9 @@
             {{ lesson.description }}
         </td>
         <td class="duration">
-            <i class="md-icon duration-icon">access_time</i>
-            <span>{{lesson.duration}}</span>
+            <!-- <i class="md-icon duration-icon">access_time</i>
+            <span>{{lesson.duration}}</span> -->
+            <button class="button button-highlight" (click)="onDelete(lesson)">X</button>
         </td>
     </tr>
     </tbody>

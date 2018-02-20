@@ -7,35 +7,35 @@ export const ADD_NEW_LESSON = 'ADD_NEW_LESSON';
 
 
 export interface Observer {
-    notify(data:any);
+    notify(data: any);
 }
 
 interface Subject {
-    registerObserver(eventType:string, obs:Observer);
-    unregisterObserver(eventType:string, obs:Observer);
-    notifyObservers(eventType:string, data:any);
+    registerObserver(eventType: string, obs: Observer);
+    unregisterObserver(eventType: string, obs: Observer);
+    notifyObservers(eventType: string, data: any);
 }
 
 class EventBus implements Subject {
 
-    private observers : {[key:string]: Observer[]} = {};
+    private observers: { [key: string]: Observer[] } = {};
 
-    registerObserver(eventType:string, obs: Observer) {
+    registerObserver(eventType: string, obs: Observer) {
         this.observersPerEventType(eventType).push(obs);
     }
 
-    unregisterObserver(eventType:string, obs: Observer) {
+    unregisterObserver(eventType: string, obs: Observer) {
         const newObservers = _.remove(
-            this.observersPerEventType(eventType), el => el === obs );
+            this.observersPerEventType(eventType), el => el === obs);
         this.observers[eventType] = newObservers;
     }
 
-    notifyObservers(eventType:string, data: any) {
+    notifyObservers(eventType: string, data: any) {
         this.observersPerEventType(eventType)
             .forEach(obs => obs.notify(data));
     }
 
-    private observersPerEventType(eventType:string): Observer[] {
+    private observersPerEventType(eventType: string): Observer[] {
         const observersPerType = this.observers[eventType];
         if (!observersPerType) {
             this.observers[eventType] = [];

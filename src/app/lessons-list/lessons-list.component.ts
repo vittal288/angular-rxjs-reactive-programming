@@ -1,6 +1,10 @@
-import {Component} from '@angular/core';
-import {globalEventBus, Observer, LESSONS_LIST_AVAILABLE, ADD_NEW_LESSON} from "../event-bus-experiments/event-bus";
-import {Lesson} from "../shared/model/lesson";
+
+
+import { Component } from '@angular/core';
+import { globalEventBus, Observer, LESSONS_LIST_AVAILABLE, ADD_NEW_LESSON } from '../event-bus-experiments/event-bus';
+import { Lesson } from '../shared/model/lesson';
+
+import * as _ from 'lodash';
 
 @Component({
     selector: 'lessons-list',
@@ -9,7 +13,7 @@ import {Lesson} from "../shared/model/lesson";
 })
 export class LessonsListComponent implements Observer {
 
-    lessons: Lesson[] =[];
+    lessons: Lesson[] = [];
 
     constructor() {
         console.log('lesson list component is registered as observer ..');
@@ -22,21 +26,24 @@ export class LessonsListComponent implements Observer {
                     description: lessonText
                 })
             }
-        } );
+        });
     }
 
     notify(data: Lesson[]) {
         console.log('Lessons list component received data ..');
-        this.lessons = data;
+        // create a shallow copy of data 
+        this.lessons = data.slice(0);
     }
 
-    toggleLessonViewed(lesson:Lesson) {
+    toggleLessonViewed(lesson: Lesson) {
         console.log('toggling lesson ...');
         lesson.completed = !lesson.completed;
     }
 
-
-
+    onDelete(deleted: Lesson) {
+       _.remove(this.lessons,
+            lesson => lesson.id === deleted.id);
+    }
 }
 
 
